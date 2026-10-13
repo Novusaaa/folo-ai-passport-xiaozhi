@@ -61,6 +61,7 @@
             color: var(--ink);
         }
         .brand-sub { font-size: 11px; font-weight: 500; letter-spacing: 1.8px; color: var(--muted); }
+        .brand-sub:empty { display: none; }
         .language-switch { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); flex: none; }
         .language-switch svg { width: 16px; height: 16px; opacity: 0.7; }
         .language-switch select {
@@ -335,10 +336,6 @@
     <div class="page">
     <!-- Header -->
     <header class="app-header">
-        <div class="brand">
-            <span class="brand-name">novus</span>
-            <span class="brand-sub">Wi-Fi SETUP</span>
-        </div>
                 <span class="brand">
             <span class="brand-name">novus</span>
             <span class="brand-sub" data-lang="brand_sub">配网 · 连接 Wi-Fi</span>
