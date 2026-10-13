@@ -521,11 +521,27 @@ void LcdDisplay::SetupUI() {
                           LV_FLEX_ALIGN_CENTER);
     lv_obj_set_scrollbar_mode(top_bar_, LV_SCROLLBAR_MODE_OFF);
 
-    // Left icon
-    network_label_ = lv_label_create(top_bar_);
+    // Left: "novus" 字标 + 网络图标(图标弱化为蓝灰,字标为主)
+    lv_obj_t* brand_row = lv_obj_create(top_bar_);
+    lv_obj_set_size(brand_row, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    lv_obj_set_style_bg_opa(brand_row, LV_OPA_TRANSP, 0);
+    lv_obj_set_style_border_width(brand_row, 0, 0);
+    lv_obj_set_style_pad_all(brand_row, 0, 0);
+    lv_obj_set_style_pad_column(brand_row, lvgl_theme->spacing(2), 0);
+    lv_obj_set_flex_flow(brand_row, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(brand_row, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER,
+                          LV_FLEX_ALIGN_CENTER);
+    lv_obj_set_scrollbar_mode(brand_row, LV_SCROLLBAR_MODE_OFF);
+
+    lv_obj_t* brand_label = lv_label_create(brand_row);
+    lv_label_set_text(brand_label, "novus");
+    lv_obj_set_style_text_font(brand_label, text_font, 0);
+    lv_obj_set_style_text_color(brand_label, lv_color_hex(0x1F3B5C), 0);
+
+    network_label_ = lv_label_create(brand_row);
     lv_label_set_text(network_label_, "");
     lv_obj_set_style_text_font(network_label_, icon_font, 0);
-    lv_obj_set_style_text_color(network_label_, lvgl_theme->text_color(), 0);
+    lv_obj_set_style_text_color(network_label_, lv_color_hex(0x5B6B80), 0);
 
     // Right icons container
     lv_obj_t* right_icons = lv_obj_create(top_bar_);
@@ -537,15 +553,27 @@ void LcdDisplay::SetupUI() {
     lv_obj_set_flex_align(right_icons, LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_CENTER,
                           LV_FLEX_ALIGN_CENTER);
 
+    // novus 强调线:深海军蓝 → 樱粉(顶栏与内容之间,3px)
+    lv_obj_t* accent_line = lv_obj_create(container_);
+    lv_obj_set_size(accent_line, LV_HOR_RES, 3);
+    lv_obj_set_style_radius(accent_line, 0, 0);
+    lv_obj_set_style_border_width(accent_line, 0, 0);
+    lv_obj_set_style_pad_all(accent_line, 0, 0);
+    lv_obj_set_style_bg_opa(accent_line, LV_OPA_COVER, 0);
+    lv_obj_set_style_bg_color(accent_line, lv_color_hex(0x1F3B5C), 0);
+    lv_obj_set_style_bg_grad_color(accent_line, lv_color_hex(0xE6B3C0), 0);
+    lv_obj_set_style_bg_grad_dir(accent_line, LV_GRAD_DIR_HOR, 0);
+    lv_obj_set_scrollbar_mode(accent_line, LV_SCROLLBAR_MODE_OFF);
+
     mute_label_ = lv_label_create(right_icons);
     lv_label_set_text(mute_label_, "");
     lv_obj_set_style_text_font(mute_label_, icon_font, 0);
-    lv_obj_set_style_text_color(mute_label_, lvgl_theme->text_color(), 0);
+    lv_obj_set_style_text_color(mute_label_, lv_color_hex(0x5B6B80), 0);
 
     battery_label_ = lv_label_create(right_icons);
     lv_label_set_text(battery_label_, "");
     lv_obj_set_style_text_font(battery_label_, icon_font, 0);
-    lv_obj_set_style_text_color(battery_label_, lvgl_theme->text_color(), 0);
+    lv_obj_set_style_text_color(battery_label_, lv_color_hex(0x5B6B80), 0);
     lv_obj_set_style_margin_left(battery_label_, lvgl_theme->spacing(2), 0);
 
     /* Layer 2: Status bar - for center text labels */
