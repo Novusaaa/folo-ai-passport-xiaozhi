@@ -331,6 +331,7 @@ idf_component_register(SRCS ${SOURCES}
                         xiaozhi-fonts
                         nvs_flash
                         esp_wifi
+                        esp-wifi-connect
                         ${MAIN_PRIV_REQUIRES_EXTRA}
                     )
 
