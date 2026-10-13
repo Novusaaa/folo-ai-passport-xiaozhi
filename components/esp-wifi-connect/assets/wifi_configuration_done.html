@@ -1,108 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WiFi Configuration</title>
+    <title>novus · 配网完成</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <style>
+        /* ===== novus 配网完成页 ===== */
         :root {
-            --bg-grad-1: #eef2ff;
-            --bg-grad-2: #e0f2fe;
-            --surface: #ffffff;
-            --border: #e2e8f0;
-            --text: #0f172a;
-            --text-muted: #64748b;
-            --success: #16a34a;
-            --shadow: 0 10px 30px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+            color-scheme: light;
+            --bg: #f6f4ed;
+            --surface: #fffdf8;
+            --line: #e7e3d8;
+            --ink: #1f3b5c;
+            --ink-soft: #5b6b80;
+            --muted: #6d7887;
+            --sakura: #e6b3c0;
+            --grape: #6b4c7a;
+            --ok: #416852;
+            --shadow: 0 8px 28px rgba(31, 59, 92, 0.04);
         }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-grad-1: #0b1220;
-                --bg-grad-2: #111827;
-                --surface: #1e293b;
-                --border: #334155;
-                --text: #e2e8f0;
-                --text-muted: #94a3b8;
-                --success: #4ade80;
-                --shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
-            }
-        }
-
         * { box-sizing: border-box; }
-        html, body { height: 100%; }
+        html, body { height: 100%; margin: 0; }
         body {
-            margin: 0;
-            overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: var(--text);
-            background: linear-gradient(160deg, var(--bg-grad-1), var(--bg-grad-2));
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            overflow-wrap: anywhere;
         }
-
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            max-height: 100vh;
-            padding: 24px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            max-width: 460px; margin: 0 auto;
+            min-height: 100vh; min-height: 100svh; padding: 24px 16px calc(28px + env(safe-area-inset-bottom, 0px));
         }
-
         .card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position: relative;
+            display: flex; flex-direction: column; align-items: center;
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
+            border: 0;
+            border-radius: 20px;
             box-shadow: var(--shadow);
-            padding: 40px 36px;
-            max-width: 360px;
+            padding: 40px 24px;
             width: 100%;
-        }
-
-        .checkmark {
-            width: 110px;
-            height: 110px;
-            margin-bottom: 24px;
-        }
-        .checkmark__circle {
-            stroke-dasharray: 166;
-            stroke-dashoffset: 166;
-            stroke: var(--success);
-            fill: none;
-            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-        }
-        .checkmark__check {
-            transform-origin: 50% 50%;
-            stroke-dasharray: 48;
-            stroke-dashoffset: 48;
-            stroke: var(--success);
-            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
-        }
-
-        @keyframes stroke {
-            to { stroke-dashoffset: 0; }
-        }
-
-        .message {
+            max-width: 100%;
+            overflow: hidden;
             text-align: center;
         }
-        .message .primary {
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0 0 6px;
+        .brand { align-self: stretch; font-size: 31px; font-weight: 800; letter-spacing: -1.6px; line-height: 1; margin: 0 4px 24px; }
+        .brand span { display: block; font-size: 11px; font-weight: 500; letter-spacing: 1.8px; color: var(--muted); margin-top: 8px; }
+        .checkmark { width: 64px; height: 64px; margin: 4px 0 16px; display: block; }
+        .checkmark__circle { fill: none; stroke: var(--ok); stroke-width: 2; }
+        .checkmark__check { fill: none; stroke: var(--ok); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+        .message { margin: 0; }
+        .message .primary { margin: 0; color: var(--ink); font-size: 16.5px; font-weight: 600; }
+        .icon { margin: 4px 0 14px; }
+        .icon svg, .icon img { width: 56px; height: 56px; }
+        .icon svg { stroke: var(--ok); }
+        .checkmark { display: block; width: 64px; height: 64px; flex: none; margin: 0 0 24px; fill: none; }
+        .checkmark__circle { fill: #f3e4e9; stroke: none; }
+        .checkmark__check { stroke: var(--grape); }
+        h2, .title { margin: 0 0 8px; font-size: 18px; font-weight: 650; color: var(--ink); }
+        p, .desc, .message { margin: 0; color: var(--ink-soft); font-size: 14.5px; line-height: 1.6; }
+        .message { max-width: 100%; }
+        .primary { color: var(--ink); font-size: 22px; font-weight: 650; line-height: 1.45; }
+        .spinner {
+            width: 30px; height: 30px; margin: 12px 0 4px;
+            border-radius: 50%;
+            border: 3px solid var(--sakura);
+            border-top-color: var(--ink);
+            animation: nov-spin 0.9s linear infinite;
         }
-        .message .secondary {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin: 0;
-        }
-    </style>
+        @keyframes nov-spin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.001ms !important; } }
+</style>
 </head>
 <body>
     <div class="container">
+        <div class="brand">novus<span>Wi-Fi SETUP</span></div>
         <div class="card">
+            <div class="brand">novus<span>配网完成</span></div>
             <svg class="checkmark" viewBox="0 0 52 52">
                 <circle class="checkmark__circle" cx="26" cy="26" r="25" stroke-width="2"/>
                 <path class="checkmark__check" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
