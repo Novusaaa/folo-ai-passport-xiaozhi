@@ -99,17 +99,17 @@ void LcdDisplay::InitializeLcdThemes() {
     auto large_icon_font = std::make_shared<LvglBuiltInFont>(&font_material_symbols_30_4);
     auto emoji_font = std::make_shared<LvglBuiltInFont>(&font_noto_emoji_30_4);
 
-    // light theme
+    // light theme -- novus 配色(骨白底 + 深海军蓝 + 樱粉/野葡萄紫点缀)
     auto light_theme = new LvglTheme("light");
-    light_theme->set_background_color(lv_color_hex(0xFFFFFF));
-    light_theme->set_text_color(lv_color_hex(0x000000));
-    light_theme->set_chat_background_color(lv_color_hex(0xE0E0E0));
-    light_theme->set_user_bubble_color(lv_color_hex(0x00FF00));
-    light_theme->set_assistant_bubble_color(lv_color_hex(0xDDDDDD));
-    light_theme->set_system_bubble_color(lv_color_hex(0xFFFFFF));
-    light_theme->set_system_text_color(lv_color_hex(0x000000));
-    light_theme->set_border_color(lv_color_hex(0x000000));
-    light_theme->set_low_battery_color(lv_color_hex(0x000000));
+    light_theme->set_background_color(lv_color_hex(0xF6F4ED));      // 骨白
+    light_theme->set_text_color(lv_color_hex(0x1F3B5C));            // 深海军蓝
+    light_theme->set_chat_background_color(lv_color_hex(0xEFECE2));
+    light_theme->set_user_bubble_color(lv_color_hex(0xE6B3C0));     // 樱粉
+    light_theme->set_assistant_bubble_color(lv_color_hex(0xFFFFFF));
+    light_theme->set_system_bubble_color(lv_color_hex(0x1F3B5C));   // 深海军蓝底
+    light_theme->set_system_text_color(lv_color_hex(0xFFFFFF));
+    light_theme->set_border_color(lv_color_hex(0xE7E3D8));
+    light_theme->set_low_battery_color(lv_color_hex(0xE58B72));     // 火焰橙
     light_theme->set_text_font(text_font);
     light_theme->set_icon_font(icon_font);
     light_theme->set_large_icon_font(large_icon_font);
